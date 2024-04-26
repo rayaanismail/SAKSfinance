@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile {{ username.capitalize() }}
+{% endblock %}
+
+{% block main %}
+<h2 class="mb-4">
+    Account Details
+</h2>
+
+<form action="/profile" method="post">
+  <div class="mb-3">
+    <label class="form-label">Edit Username</label>
+    <input name="username" autocomplete="off" autofocus class="form-control w-25 mx-auto" placeholder="{{ username }}">
+    <p id="success"> {{ usuccess }}</p>
+  </div>
+  <div class="mb-3">
+    <div class="card w-25 mx-auto">
+      <div class="card-header">
+        <h4>Change Password</h4>
+      </div>
+
+      <div class="card-body">
+        <div class="mb-1">
+          <label class="form-label">Current Password</label>
+          <input type="password" name="currentpass" autocomplete="off" autofocus class="form-control">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">New Password</label>
+          <input type="password" name="newpass" autocomplete="off" autofocus class="form-control">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" name="confirmpass" autocomplete="off" autofocus class="form-control">
+          <p id="error">{{ perror }}</p>
+          <p id="success">{{ psuccess }}</p>
+        </div>
+        <button type="submit" name="edit_udata" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+
+    <p class="mt-3">Current Starting Cash: <span class="text-success fw-bold">{{ user_initcash | usd}}</span></p>
+    <div class="input-group w-25 mx-auto ">
+      <input type="number" name="cash" id="addcash" class="form-control border-success placeholder-success" placeholder="$0" style="">
+      <button class="btn btn-outline-success" name="add$" type="submit" id="button-addon2">Add Cash</button>
+      <p id="success">{{ cashsuccess }}</p>
+      <p id="error">{{ casherror }}</p>
+    </div>
+  </div>
+</form>
+
+
+  </div>
+{% endblock %}

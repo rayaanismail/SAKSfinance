@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home | {{ username.capitalize() }}
+{% endblock %}
+
+{% block main %}
+<h2 style="font-weight: lighter" class="mb-5">Welcome <b style="font-weight: 600" >{{ username.capitalize() }}</b>!</h2>
+<div class="row mb-3">
+
+    {% if nostocks==1 %}
+    <div>
+      <div> Uh oh! It seems you have no stocks in your inventory. Purchase stocks <a href="/buy">here.</a></div>
+    </div>
+    {% endif %}
+</div>
+{% if nostocks != 1 %}
+  <div class="col bg-light d-flex align-items-center justify-content-center mx-auto" style="max-width: 50%;">
+          Below is a table summarizing your stock data.
+  </div>
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Owned Stocks</th>
+        <th scope="col">Owned Shares</th>
+        <th scope="col">Price Per Share</th>
+        <th scope="col">Total Holding Valuation</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for stock in tabledata %}
+        <tr>
+            <th scope="row">{{ stock["symbol"] }}</th>
+            <td>{{ stock["shares"] }}</td>
+            <td style="color: #2e944b">{{ stock["unitPrice"] }}</td>
+            <td style="color: #2e944b"><b>{{ stock["totVal"] }}</b></td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td><b>TOTAL: </b>{{ totStocks}}</td>
+            <td>{{ totShares}}</td>
+            <td>Average: <span style="color: #2e944b">{{ avgShare }}</span>/share</td>
+            <td><span style="color: #2e944b"><b>{{ totVal}}</b></span></td>
+        </tr>
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}

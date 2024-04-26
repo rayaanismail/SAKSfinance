@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+<p>
+    Log Into
+    <span style="color: #537fbe">S</span><span style="color: #ea433b">A</span><span style="color: #f5b82e">K</span><span style="color: #2e944b">$</span> <span style="color: #ea433b">Finance</span>
+</p>
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div>
+            <p  style="color: #ea433b">{{ error }}</p>
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+{% endblock %}

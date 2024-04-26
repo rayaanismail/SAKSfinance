@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ username.capitalize() }}'s History
+{% endblock %}
+
+{% block main %}
+<h2 style="font-weight: lighter" class="mb-5"><b style="font-weight: 600" >{{ username.capitalize() }}</b>'s Transaction History</h2>
+<div class="row mb-3">
+
+    {% if nostocks==1 %}
+    <div>
+      <div> Uh oh! It seems you have no transactions in your history. Purchase stocks <a href="/buy">here.</a></div>
+    </div>
+    {% endif %}
+</div>
+{% if nostocks != 1 %}
+  <div class="col bg-light d-flex align-items-center justify-content-center mx-auto" style="max-width: 50%;">
+          You have made {{ total }} transactions!
+  </div>
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Stock Symbol</th>
+        <th scope="col">Transaction Type</th>
+        <th scope="col">Share Amount</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Purchase Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for instance in instances %}
+        <tr>
+            <th scope="row">{{ instance["symbol"] }}</th>
+            <td>{{ instance["type"] }}</td>
+            <td>{{ instance["shares"] }}</td>
+            <td>{{ instance["unit_price"] | usd }}</td>
+            <td>{{ instance["price"] | usd}}</td>
+            <td>{{ instance["purchase_time"] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}

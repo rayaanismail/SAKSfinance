@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+<p>
+    Select a <a target="_blank" style="color: #537fbe" href="https://stockanalysis.com/stocks/">Stock Ticker Symbol</a> to sell.
+</p>
+<form action="/sell" method="post">
+    <select class="custom-select mb-1" style="width: 7%;" name="symbol">
+      <option name="no_stock"></option>
+        {% for stock in stocks %}
+          <option name="{{ stock }}">{{ stock }}</option>
+        {% endfor %}
+    </select>
+    <div class="col">
+      <input name="shares" type="text" class="form-control form-control" placeholder="Share Amount" style="display: inline-block; width: 11.5%;">
+      <button class="btn btn-success btn" type="submit" style="display: inline-block; margin-left: 10px;">Sell</button>
+    </div>
+</form>
+  {% if error %}
+    <p style="color: #ea433b">{{ error }}</p>
+  {% endif %}
+  {% if validstock == 1 %}
+    <p><b>{{ shares }}</b> share(s) of <b>{{ symbol }}</b> = <b style="color: #2e944b">{{ total }}</b></p>
+  {% endif %}
+</div>
+
+
+{% endblock %}

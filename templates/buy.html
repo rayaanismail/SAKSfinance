@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+<p>
+    Input a <a target="_blank" style="color: #537fbe" href="https://stockanalysis.com/stocks/">Stock Ticker Symbol</a> to purchase shares.
+</p>
+
+    <form action="/buy" method="post">
+        <div class="mb-3">
+            <input value="{{ symbol }}" autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Symbol" style="margin-bottom: 8px" type="text">
+            <input value="{{ shares }}" autocomplete="off" autofocus class="form-control mx-auto w-auto" name="shares" placeholder="Share Amount" type="number">
+            <small class="form-text text-muted">Default's to 1 if blank</small>
+        </div>
+        {% if error %}
+        <p style="color: #ea433b">{{ error }}</p>
+        {% endif %}
+        {% if validstock == 1 %}
+            <p ><b>{{ shares }}</b> share(s) of <b >{{ symbol }}</b> = <b style="color: #2e944b">{{ total }}</b></p>
+        {% endif %}
+        <button class="btn btn-info" type="submit" name="verify">Check Amount</button>
+        <button class="btn btn-primary" type="submit" name="purchase">Purchase</button>
+    </form>
+{% endblock %}
